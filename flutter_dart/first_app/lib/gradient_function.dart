@@ -1,27 +1,33 @@
-import 'package:first_app/style_text.dart';
+
 import 'package:flutter/material.dart';
 
 const startAlign = Alignment.topLeft;
 const endAlign = Alignment.bottomRight;
 
 class GradientFunction extends StatelessWidget {
-   const GradientFunction({super.key});
+   const GradientFunction(this.color1, this.color2, {super.key});
+
+   const GradientFunction.purple({super.key})
+        : color1 = Colors.deepPurple,
+          color2 = Colors.indigo;
+
+   final Color color1;
+   final Color color2;
+
   @override
   Widget build(context){
     final stopwatch = Stopwatch()..start();
     Widget gradientWidget = Container(
-          decoration:const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors:[
-                Color.fromARGB(255, 109, 33, 79),
-                Color.fromARGB(255, 98, 100, 104),
-              ],
+              colors: [color1, color2],
               begin: startAlign,
               end: endAlign,
             ),
           ),
-          child: const Center(
-            child: StyledText('Text to style as parameter')
+          child:  Center(
+            child: Image.asset('assets/images/dice-5.png',
+            width: 200)
           ),
         );
          stopwatch.stop();
@@ -29,3 +35,28 @@ class GradientFunction extends StatelessWidget {
     return gradientWidget;
   }
 }
+
+// class GradientFunction extends StatelessWidget {
+//    const GradientFunction({super.key,required this.colors});
+//    final List<Color> colors;
+
+//   @override
+//   Widget build(context){
+//     final stopwatch = Stopwatch()..start();
+//     Widget gradientWidget = Container(
+//           decoration: BoxDecoration(
+//             gradient: LinearGradient(
+//               colors: colors,
+//               begin: startAlign,
+//               end: endAlign,
+//             ),
+//           ),
+//           child: const Center(
+//             child: StyledText('Text to style as parameter')
+//           ),
+//         );
+//          stopwatch.stop();
+//     print('Execution time build: ${stopwatch.elapsedMilliseconds} ms');
+//     return gradientWidget;
+//   }
+// }
