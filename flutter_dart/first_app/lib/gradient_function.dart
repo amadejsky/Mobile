@@ -1,4 +1,8 @@
+import 'package:first_app/style_text.dart';
 import 'package:flutter/material.dart';
+
+const startAlign = Alignment.topLeft;
+const endAlign = Alignment.bottomRight;
 
 class GradientFunction extends StatelessWidget {
    const GradientFunction({super.key});
@@ -6,24 +10,18 @@ class GradientFunction extends StatelessWidget {
   Widget build(context){
     final stopwatch = Stopwatch()..start();
     Widget gradientWidget = Container(
-          decoration: const BoxDecoration(
+          decoration:const BoxDecoration(
             gradient: LinearGradient(
-              colors: [
+              colors:[
                 Color.fromARGB(255, 109, 33, 79),
-                Color.fromARGB(255, 24, 44, 97),
+                Color.fromARGB(255, 98, 100, 104),
               ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+              begin: startAlign,
+              end: endAlign,
             ),
           ),
           child: const Center(
-            child: Text(
-              'Hello World',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30,
-              ),
-            ),
+            child: StyledText('Text to style as parameter')
           ),
         );
          stopwatch.stop();
