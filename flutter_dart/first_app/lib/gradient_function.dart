@@ -1,4 +1,5 @@
 
+import 'package:first_app/dice_roller.dart';
 import 'package:flutter/material.dart';
 
 const startAlign = Alignment.topLeft;
@@ -14,6 +15,8 @@ class GradientFunction extends StatelessWidget {
    final Color color1;
    final Color color2;
 
+  
+
   @override
   Widget build(context){
     final stopwatch = Stopwatch()..start();
@@ -25,9 +28,8 @@ class GradientFunction extends StatelessWidget {
               end: endAlign,
             ),
           ),
-          child:  Center(
-            child: Image.asset('assets/images/dice-5.png',
-            width: 200)
+          child: const Center(
+            child: DiceRoller(),           
           ),
         );
          stopwatch.stop();
