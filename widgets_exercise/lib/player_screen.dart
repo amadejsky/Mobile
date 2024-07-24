@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-class PlayerScreen extends StatelessWidget {
+class PlayerScreen extends StatefulWidget {
+  const PlayerScreen({super.key});
+
   @override
-  Widget build(BuildContext context) {
+  State<PlayerScreen> createState(){
+    return _PlayerScreenState();
+  }
+}
+  class _PlayerScreenState extends State<PlayerScreen>{
+    double _currentPosition = 0.75;
+    @override
+    Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         body: Container(
@@ -73,10 +83,23 @@ class PlayerScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Image.asset(
-                'assets/images/slider.png',
-                width: 1400,
-              ),
+              // Image.asset(
+              //   'assets/images/slider.png',
+              //   width: 1400,
+              // ),
+              Slider(
+                value: _currentPosition, 
+                min: 0,
+                max: 1,
+                onChanged: (value){
+                  setState((){
+                    _currentPosition = value;
+                  });
+                },
+                activeColor: Colors.white,
+                inactiveColor: Colors.grey,
+                ),
+
               const SizedBox(height: 10,),
               Row(
 
@@ -163,4 +186,7 @@ class PlayerScreen extends StatelessWidget {
       ),
     );
   }
-}
+
+  }
+
+  
