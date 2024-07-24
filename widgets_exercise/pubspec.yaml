@@ -62,7 +62,8 @@ flutter:
   assets:
     - assets/images/undraw_audio_player.png
     - assets/images/example1.png  
-    - assets/images/slider.png     
+    - assets/images/slider.png
+    - assets/images/spt.png          
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
