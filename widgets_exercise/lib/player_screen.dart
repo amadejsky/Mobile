@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:widgets_exercise/data/songs.dart';
+import 'package:widgets_exercise/models/song_model.dart';
+
 
 class PlayerScreen extends StatefulWidget {
   const PlayerScreen({super.key});
@@ -11,6 +14,12 @@ class PlayerScreen extends StatefulWidget {
 }
   class _PlayerScreenState extends State<PlayerScreen>{
     double _currentPosition = 0.75;
+    late SongModel currentSong;
+    @override
+    void initState(){
+      super.initState();
+      currentSong = songs[0];
+    }
     @override
     Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,7 +43,7 @@ class PlayerScreen extends StatefulWidget {
             children: [
               const Spacer(),
               Image.asset(
-                'assets/images/example1.png',
+                'assets/images/song1.png',
                 width: 390,
               ),
               const SizedBox(
@@ -43,14 +52,15 @@ class PlayerScreen extends StatefulWidget {
               Container(
                 width: double.infinity,
                 height: 60,
-                child: const Stack(
+                child: Stack(
                   children: [
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
-                        padding: EdgeInsets.only(left: 20.0),
-                        child: Text('In This Together',
-                            style: TextStyle(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: Text(
+                          currentSong.title,
+                            style: const TextStyle(
                                 fontSize: 30,
                                 color: Color.fromARGB(255, 253, 253, 253),
                                 fontWeight: FontWeight.bold,
@@ -59,7 +69,8 @@ class PlayerScreen extends StatefulWidget {
           
                       ),
                     ),
-                    Positioned(
+                    
+                    const Positioned(
                         right: 10.0,
                         top: 30.0,
                         child: Icon(
@@ -70,12 +81,12 @@ class PlayerScreen extends StatefulWidget {
                   ],
                 ),
               ),
-              const Align(
+              Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 20.0),
-                  child: Text('Boil The Ocean',
-                      style: TextStyle(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Text(currentSong.band,
+                      style:const TextStyle(
                           fontSize: 15,
                           color: Color.fromARGB(153, 253, 253, 253))),
                 ),
