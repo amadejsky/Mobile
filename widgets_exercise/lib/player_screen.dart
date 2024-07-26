@@ -16,6 +16,26 @@ class PlayerScreen extends StatefulWidget {
     double _currentPosition = 0.75;
     late SongModel currentSong;
     late int currentIndex;
+    bool _isShuffleActive = false;
+    bool _isRepeatActive = true;
+    bool _isLikedActice = true;
+
+    void _toggleShuffle(){
+      setState(() {
+        _isShuffleActive = ! _isShuffleActive;
+      });
+    }
+    void _toggleRepeat(){
+      setState(() {
+        _isRepeatActive = !_isRepeatActive;
+      });
+    }
+    void _toggleLike(){
+      setState(() {
+        _isLikedActice = !_isLikedActice;
+      });
+    }
+
     @override
     void initState(){
       super.initState();
@@ -95,14 +115,23 @@ void _nextSong() {
                       ),
                     ),
                     
-                    const Positioned(
+                    Positioned(
+                     
                         right: 10.0,
-                        top: 30.0,
-                        child: Icon(
-                          Icons.favorite,
-                          color: Color.fromARGB(255, 29, 185, 84),
-                          size: 33,
-                        )),
+                        top: 20.0,
+                        child: IconButton(
+                            onPressed: _toggleLike,
+                            icon: Icon(
+                              Icons.favorite,
+                              size: 33,
+                              color: _isLikedActice ? Color.fromARGB(255, 29, 185, 84) : Colors.white,
+                            ),),  
+                        // child: Icon(
+                        //   Icons.favorite,
+                        //   color: Color.fromARGB(255, 29, 185, 84),
+                        //   size: 33,
+                        // )
+                        ),
                   ],
                 ),
               ),
@@ -142,11 +171,11 @@ void _nextSong() {
                mainAxisAlignment: MainAxisAlignment.center,
                children: [
                 IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
+                    onPressed: _toggleShuffle,
+                    icon: Icon(
                       Icons.shuffle_outlined,
                       size: 27,
-                      color: Color.fromARGB(255, 29, 185, 84),
+                      color: _isShuffleActive ? Color.fromARGB(255, 29, 185, 84) : Colors.white,
                     ),),  
                     const SizedBox(width: 30,height:0),
                 IconButton(
@@ -174,11 +203,11 @@ void _nextSong() {
                   ),
                   const SizedBox(width: 30,height:0),
                 IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
+                    onPressed: _toggleRepeat,
+                    icon: Icon(
                       Icons.loop_outlined,
                       size: 27,
-                      color: Color.fromARGB(255, 29, 185, 84),
+                      color: _isRepeatActive ? Color.fromARGB(255, 29, 185, 84) : Colors.white,
                     ),),  
                 // OutlinedButton(
                 //   onPressed: () {},
