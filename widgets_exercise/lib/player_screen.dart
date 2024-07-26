@@ -15,11 +15,36 @@ class PlayerScreen extends StatefulWidget {
   class _PlayerScreenState extends State<PlayerScreen>{
     double _currentPosition = 0.75;
     late SongModel currentSong;
+    late int currentIndex;
     @override
     void initState(){
       super.initState();
-      currentSong = songs[0];
+      currentIndex = 0;
+      currentSong = songs[currentIndex];
+      
     }
+
+    void _previousSong() {
+  setState(() {
+    if (currentIndex == 0) {
+      currentIndex = songs.length - 1;
+    } else {
+      currentIndex -=1;
+    }
+    currentSong = songs[currentIndex];
+  });
+}
+
+void _nextSong() {
+  setState(() {
+    if (currentIndex == songs.length - 1) {
+      currentIndex = 0;
+    } else {
+      currentIndex += 1;
+    }
+    currentSong = songs[currentIndex];
+  });
+}
     @override
     Widget build(BuildContext context) {
     return MaterialApp(
@@ -43,7 +68,7 @@ class PlayerScreen extends StatefulWidget {
             children: [
               const Spacer(),
               Image.asset(
-                'assets/images/song1.png',
+                'assets/images/song${currentIndex}.png',
                 width: 390,
               ),
               const SizedBox(
@@ -62,7 +87,7 @@ class PlayerScreen extends StatefulWidget {
                           currentSong.title,
                             style: const TextStyle(
                                 fontSize: 30,
-                                color: Color.fromARGB(255, 253, 253, 253),
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 
                                 )),
@@ -125,7 +150,7 @@ class PlayerScreen extends StatefulWidget {
                     ),),  
                     const SizedBox(width: 30,height:0),
                 IconButton(
-                  onPressed: () {}, 
+                  onPressed: _previousSong, 
                   icon: const Icon(
                     Icons.arrow_back_ios,
                     size: 45,
@@ -140,7 +165,7 @@ class PlayerScreen extends StatefulWidget {
                       color: Colors.white,
                     ),),  
                 IconButton(
-                  onPressed: () {}, 
+                  onPressed: _nextSong, 
                   icon: const Icon(
                     Icons.arrow_forward_ios,
                     size: 45,
